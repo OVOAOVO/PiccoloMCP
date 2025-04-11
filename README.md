@@ -1,6 +1,6 @@
 # MCP Server
 
-This is an MCP server implementation that can be used for more than just the Piccolo engine.
+This is an MCP server Client implementation that can be used for more than just the Piccolo engine.
 
 # What is MCP
 
