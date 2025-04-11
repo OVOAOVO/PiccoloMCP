@@ -30,10 +30,10 @@ def register_add_cube_tool(mcp: FastMCP):
                 "scale": scale or {"x": 1, "y": 1, "z": 1},
             }
 
-            # Send command to Unity to add the Cube
-            response = get_unity_connection().send_command("add_cube", params)
+            # Send command to Piccolo to add the Cube
+            response = get_piccolo_connection().send_command("add_cube", params)
 
-            # Process Unity's response
+            # Process Piccolo's response
             if response.get("success"):
                 return {"success": True, "message": response.get("message", "Cube added successfully."), "data": response.get("data")}
             else:
