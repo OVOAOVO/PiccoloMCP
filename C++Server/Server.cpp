@@ -98,8 +98,6 @@ private:
                 };
                 send_response(error_response);
             }
-
-            start_read();
         }
         else
         {
