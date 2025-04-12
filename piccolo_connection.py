@@ -107,7 +107,7 @@ class PiccoloConnection:
         if command_type == "ping":
             try:
                 logger.debug("Sending ping to verify connection")
-                self.sock.sendall(b"ping")
+                self.sock.sendall(b"ping\n")
                 response_data = self.receive_full_response(self.sock)
                 response = json.loads(response_data.decode('utf-8'))
                 
@@ -134,7 +134,7 @@ class PiccoloConnection:
             logger.info(f"Sending command: {command_type} with params size: {command_size} bytes")
             
             # Ensure we have a valid JSON string before sending
-            command_json = json.dumps(command, ensure_ascii=False)
+            command_json = json.dumps(command, ensure_ascii=False) + "\n"
             self.sock.sendall(command_json.encode('utf-8'))
             
             response_data = self.receive_full_response(self.sock)
