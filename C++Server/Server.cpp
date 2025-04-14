@@ -114,23 +114,40 @@ private:
         std::cout << "Command Type: " << command_type << std::endl;
         std::cout << "Params: " << params.dump() << std::endl;
 
+        // 检查是否为 add_cube 命令
         if (command_type == "add_cube") {
+            std::string name = params["name"].string_value();  // 获取 Cube 名称
+            Json position = params["position"];  // 获取 Cube 位置
+            Json scale = params["scale"];  // 获取 Cube 缩放
+
+            // 输出调试信息
             std::cout << std::endl;
             std::cout << "SUCCESS_FUNCTION" << std::endl;
             std::cout << "Function: add_cube" << std::endl;
             std::cout << "END_FUNCTION" << std::endl;
             std::cout << std::endl;
+
+
+            Json response = Json::object{
+                {"status", "success"},  // 改为 success
+                {"error", "An error occurred while adding the Cube." },
+                {"result", Json::object{
+                    {"success", true},
+                    {"message", "Command Success!"},
+                    {"data", params}
+                }}
+            };
+
+            return response;
         }
 
+        // 处理其他命令类型（如果有）
         return Json::object{
-            {"status", "success"},
-            {"result", Json::object{
-                {"message", "Command received"},
-                {"echo_type", command_type},
-                {"echo_params", params}
-            }}
+            {"status", "error"},
+            {"error", "An error occurred while adding the Cube."}
         };
     }
+
 
     void send_response(const Json& response)
     {
